@@ -1,0 +1,5 @@
+# src/OC/PlatformBundle/Resources/config/routing.yml
+
+oc_platform_homepage:
+    path:     /
+    defaults: { _controller: OCPlatformBundle:Default:index }
