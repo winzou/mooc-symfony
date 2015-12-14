@@ -15,15 +15,6 @@ oc_platform_view:
     requirements:
         id: \d+
 
-oc_platform_view_slug:
-    path:      /{year}/{slug}.{_format}
-    defaults:
-        _controller: OCPlatformBundle:Advert:viewSlug
-        _format:     html
-    requirements:
-        year:   \d{4}
-        format: html|xml
-
 oc_platform_add:
     path:      /add
     defaults:
