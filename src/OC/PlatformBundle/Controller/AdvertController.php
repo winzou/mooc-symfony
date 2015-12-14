@@ -4,8 +4,8 @@
 
 namespace OC\PlatformBundle\Controller;
 
-// N'oubliez pas ce use :
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request; // N'oubliez pas ce use !
 use Symfony\Component\HttpFoundation\Response;
 
 class AdvertController extends Controller
@@ -22,16 +22,34 @@ class AdvertController extends Controller
     return new Response("L'URL de l'annonce d'id 5 est : ".$url);
   }
 
-  // La route fait appel à OCPlatformBundle:Advert:view, on doit donc définir la méthode viewAction.
-  // On donne à cette méthode l'argument $id, pour correspondre au paramètre {id} de la route
-  public function viewAction($id)
+  // On injecte la requête dans les arguments de la méthode
+  public function viewAction($id, Request $request)
   {
-    // $id vaut 5 si l'on a appelé l'URL /platform/advert/5
+    // On récupère notre paramètre tag
+    $tag = $request->query->get('tag');
 
-    // Ici, on récupèrera depuis la base de données l'annonce correspondant à l'id $id.
-    // Puis on passera l'annonce à la vue pour qu'elle puisse l'afficher
+    return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
+      'id'  => $id,
+      'tag' => $tag,
+    ));
+  }
 
-    return new Response("Affichage de l'annonce d'id : ".$id);
+  // Ajoutez cette méthode :
+  public function addAction(Request $request)
+  {
+    $session = $request->getSession();
+
+    // Bien sûr, cette méthode devra réellement ajouter l'annonce
+
+    // Mais faisons comme si c'était le cas
+    $session->getFlashBag()->add('info', 'Annonce bien enregistrée');
+
+    // Le « flashBag » est ce qui contient les messages flash dans la session
+    // Il peut bien sûr contenir plusieurs messages :
+    $session->getFlashBag()->add('info', 'Oui oui, elle est bien enregistrée !');
+
+    // Puis on redirige vers la page de visualisation de cette annonce
+    return $this->redirectToRoute('oc_platform_view', array('id' => 5));
   }
 
   // On récupère tous les paramètres en arguments de la méthode
