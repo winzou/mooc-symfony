@@ -47,6 +47,11 @@ class Advert
    */
   private $content;
 
+  /**
+   * @ORM\Column(name="published", type="boolean")
+   */
+  private $published = true;
+
   public function __construct()
   {
     // Par défaut, la date de l'annonce est la date d'aujourd'hui
@@ -124,4 +129,20 @@ class Advert
   {
     return $this->content;
   }
+
+    /**
+     * @param bool $published
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getPublished()
+    {
+        return $this->published;
+    }
 }
