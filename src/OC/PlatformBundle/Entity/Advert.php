@@ -130,19 +130,19 @@ class Advert
     return $this->content;
   }
 
-    /**
-     * @param bool $published
-     */
-    public function setPublished($published)
-    {
-        $this->published = $published;
-    }
+  /**
+   * @param bool $published
+   */
+  public function setPublished($published)
+  {
+    $this->published = $published;
+  }
 
-    /**
-     * @return bool
-     */
-    public function getPublished()
-    {
-        return $this->published;
-    }
+  /**
+   * @return bool
+   */
+  public function getPublished()
+  {
+    return $this->published;
+  }
 }
