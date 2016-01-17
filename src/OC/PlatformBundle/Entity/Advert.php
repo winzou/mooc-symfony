@@ -2,6 +2,7 @@
 
 namespace OC\PlatformBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -57,10 +58,16 @@ class Advert
    */
   private $image;
 
+  /**
+   * @ORM\ManyToMany(targetEntity="OC\PlatformBundle\Entity\Category", cascade={"persist"})
+   * @ORM\JoinTable(name="oc_advert_category")
+   */
+  private $categories;
+
   public function __construct()
   {
-    // Par défaut, la date de l'annonce est la date d'aujourd'hui
-    $this->date = new \Datetime();
+    $this->date       = new \Datetime();
+    $this->categories = new ArrayCollection();
   }
 
   /**
@@ -159,5 +166,29 @@ class Advert
   public function getImage()
   {
     return $this->image;
+  }
+
+  /**
+   * @param Category $category
+   */
+  public function addCategory(Category $category)
+  {
+    $this->categories[] = $category;
+  }
+
+  /**
+   * @param Category $category
+   */
+  public function removeCategory(Category $category)
+  {
+    $this->categories->removeElement($category);
+  }
+
+  /**
+   * @return ArrayCollection
+   */
+  public function getCategories()
+  {
+    return $this->categories;
   }
 }
