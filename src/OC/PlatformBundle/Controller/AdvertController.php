@@ -19,10 +19,10 @@ class AdvertController extends Controller
     // Notre liste d'annonce en dur
     $listAdverts = array(
       array(
-        'title'   => 'Recherche développpeur Symfony2',
+        'title'   => 'Recherche développpeur Symfony',
         'id'      => 1,
         'author'  => 'Alexandre',
-        'content' => 'Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…',
+        'content' => 'Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…',
         'date'    => new \Datetime()),
       array(
         'title'   => 'Mission de webmaster',
@@ -46,10 +46,10 @@ class AdvertController extends Controller
   public function viewAction($id)
   {
     $advert = array(
-      'title'   => 'Recherche développpeur Symfony2',
+      'title'   => 'Recherche développpeur Symfony',
       'id'      => $id,
       'author'  => 'Alexandre',
-      'content' => 'Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…',
+      'content' => 'Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…',
       'date'    => new \Datetime()
     );
 
@@ -81,10 +81,10 @@ class AdvertController extends Controller
     }
 
     $advert = array(
-      'title'   => 'Recherche développpeur Symfony2',
+      'title'   => 'Recherche développpeur Symfony',
       'id'      => $id,
       'author'  => 'Alexandre',
-      'content' => 'Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…',
+      'content' => 'Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…',
       'date'    => new \Datetime()
     );
 
@@ -102,7 +102,7 @@ class AdvertController extends Controller
   {
     // On fixe en dur une liste ici, bien entendu par la suite on la récupérera depuis la BDD !
     $listAdverts = array(
-      array('id' => 2, 'title' => 'Recherche développeur Symfony2'),
+      array('id' => 2, 'title' => 'Recherche développeur Symfony'),
       array('id' => 5, 'title' => 'Mission de webmaster'),
       array('id' => 9, 'title' => 'Offre de stage webdesigner')
     );
