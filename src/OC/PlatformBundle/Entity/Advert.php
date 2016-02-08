@@ -4,6 +4,8 @@ namespace OC\PlatformBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+// N'oubliez pas ce use :
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="oc_advert")
@@ -79,6 +81,12 @@ class Advert
    * @ORM\Column(name="nb_applications", type="integer")
    */
   private $nbApplications = 0;
+
+  /**
+   * @Gedmo\Slug(fields={"title"})
+   * @ORM\Column(name="slug", type="string", length=255, unique=true)
+   */
+  private $slug;
 
   public function __construct()
   {
@@ -284,5 +292,21 @@ class Advert
   public function getNbApplications()
   {
       return $this->nbApplications;
+  }
+
+  /**
+   * @param string $slug
+   */
+  public function setSlug($slug)
+  {
+      $this->slug = $slug;
+  }
+
+  /**
+   * @return string
+   */
+  public function getSlug()
+  {
+      return $this->slug;
   }
 }
