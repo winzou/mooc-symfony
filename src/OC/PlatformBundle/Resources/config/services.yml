@@ -7,3 +7,15 @@ services:
             - "@mailer"
             - %locale%
             - 50
+
+  oc_platform.email.application_mailer:
+      class: OC\PlatformBundle\Email\ApplicationMailer
+      arguments:
+          - "@mailer"
+
+  oc_platform.doctrine_listener.application_creation:
+    class: OC\PlatformBundle\DoctrineListener\ApplicationCreationListener
+    arguments:
+      - "@oc_platform.email.application_mailer"
+    tags:
+      - { name: doctrine.event_listener, event: postPersist }
