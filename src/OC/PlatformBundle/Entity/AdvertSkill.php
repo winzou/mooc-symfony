@@ -37,85 +37,59 @@ class AdvertSkill
 
   // ... vous pouvez ajouter d'autres attributs bien sûr
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+  /**
+   * @return integer
+   */
+  public function getId()
+  {
+    return $this->id;
+  }
 
-    /**
-     * Set level
-     *
-     * @param string $level
-     *
-     * @return AdvertSkill
-     */
-    public function setLevel($level)
-    {
-        $this->level = $level;
-    
-        return $this;
-    }
+  /**
+   * @param string $level
+   */
+  public function setLevel($level)
+  {
+    $this->level = $level;
+  }
 
-    /**
-     * Get level
-     *
-     * @return string
-     */
-    public function getLevel()
-    {
-        return $this->level;
-    }
+  /**
+   * @return string
+   */
+  public function getLevel()
+  {
+    return $this->level;
+  }
 
-    /**
-     * Set advert
-     *
-     * @param \OC\PlatformBundle\Entity\Advert $advert
-     *
-     * @return AdvertSkill
-     */
-    public function setAdvert(\OC\PlatformBundle\Entity\Advert $advert)
-    {
-        $this->advert = $advert;
-    
-        return $this;
-    }
+  /**
+   * @param Advert $advert
+   */
+  public function setAdvert(Advert $advert)
+  {
+    $this->advert = $advert;
+  }
 
-    /**
-     * Get advert
-     *
-     * @return \OC\PlatformBundle\Entity\Advert
-     */
-    public function getAdvert()
-    {
-        return $this->advert;
-    }
+  /**
+   * @return Advert
+   */
+  public function getAdvert()
+  {
+    return $this->advert;
+  }
 
-    /**
-     * Set skill
-     *
-     * @param \OC\PlatformBundle\Entity\Skill $skill
-     *
-     * @return AdvertSkill
-     */
-    public function setSkill(\OC\PlatformBundle\Entity\Skill $skill)
-    {
-        $this->skill = $skill;
-    
-        return $this;
-    }
+  /**
+   * @param Skill $skill
+   */
+  public function setSkill(Skill $skill)
+  {
+    $this->skill = $skill;
+  }
 
-    /**
-     * Get skill
-     *
-     * @return \OC\PlatformBundle\Entity\Skill
-     */
-    public function getSkill()
-    {
-        return $this->skill;
-    }
+  /**
+   * @return Skill
+   */
+  public function getSkill()
+  {
+    return $this->skill;
+  }
 }
