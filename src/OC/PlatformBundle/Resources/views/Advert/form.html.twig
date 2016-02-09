@@ -9,7 +9,9 @@
   {{ form_errors(form) }}
 
   {# Génération du label + error + widget pour un champ. #}
-  {{ form_row(form.date) }}
+  {% if form.date is defined %}
+    {{ form_row(form.date) }}
+  {% endif %}
 
   {# Génération manuelle et éclatée : #}
   <div class="form-group">
