@@ -1,4 +1,5 @@
 <?php
+// src/OC/PlatformBundle/Form/AdvertType.php
 
 namespace OC\PlatformBundle\Form;
 
@@ -21,6 +22,7 @@ class AdvertType extends AbstractType
       ->add('author',    TextType::class)
       ->add('content',   TextareaType::class)
       ->add('published', CheckboxType::class, array('required' => false))
+      ->add('image',     ImageType::class) // Ajoutez cette ligne
       ->add('save',      SubmitType::class);
   }
 
