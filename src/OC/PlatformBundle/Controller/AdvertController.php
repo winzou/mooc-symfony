@@ -6,6 +6,12 @@ namespace OC\PlatformBundle\Controller;
 
 use OC\PlatformBundle\Entity\Advert;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -78,17 +84,47 @@ class AdvertController extends Controller
 
   public function addAction(Request $request)
   {
-    $em = $this->getDoctrine()->getManager();
+    // On crée un objet Advert
+    $advert = new Advert();
 
-    // On ne sait toujours pas gérer le formulaire, patience cela vient dans la prochaine partie !
+    // J'ai raccourci cette partie, car c'est plus rapide à écrire !
+    $form = $this->get('form.factory')->createBuilder(FormType::class, $advert)
+      ->add('date',      DateType::class)
+      ->add('title',     TextType::class)
+      ->add('content',   TextareaType::class)
+      ->add('author',    TextType::class)
+      ->add('published', CheckboxType::class, array('required' => false))
+      ->add('save',      SubmitType::class)
+      ->getForm()
+    ;
 
+    // Si la requête est en POST
     if ($request->isMethod('POST')) {
-      $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+      // On fait le lien Requête <-> Formulaire
+      // À partir de maintenant, la variable $advert contient les valeurs entrées dans le formulaire par le visiteur
+      $form->handleRequest($request);
 
-      return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
+      // On vérifie que les valeurs entrées sont correctes
+      // (Nous verrons la validation des objets en détail dans le prochain chapitre)
+      if ($form->isValid()) {
+        // On enregistre notre objet $advert dans la base de données, par exemple
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($advert);
+        $em->flush();
+
+        $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+
+        // On redirige vers la page de visualisation de l'annonce nouvellement créée
+        return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
+      }
     }
 
-    return $this->render('OCPlatformBundle:Advert:add.html.twig');
+    // À ce stade, le formulaire n'est pas valide car :
+    // - Soit la requête est de type GET, donc le visiteur vient d'arriver sur la page et veut voir le formulaire
+    // - Soit la requête est de type POST, mais le formulaire contient des valeurs invalides, donc on l'affiche de nouveau
+    return $this->render('OCPlatformBundle:Advert:add.html.twig', array(
+      'form' => $form->createView(),
+    ));
   }
 
   public function editAction($id, Request $request)
