@@ -11,7 +11,11 @@
   <div style="float: left; margin-right: 1em;">
     {# On vérifie qu'une image soit bien associée à l'article #}
     {% if advert.image is not null %}
-      <img src="{{ advert.image.url }}" alt="{{ advert.image.alt }}" height="60">
+      <img
+        src="{{ asset(advert.image.webPath) }}"
+        alt="{{ advert.image.alt }}"
+        height="60"
+      />
     {% endif %}
   </div>
 
