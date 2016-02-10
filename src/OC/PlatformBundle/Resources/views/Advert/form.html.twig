@@ -30,7 +30,7 @@
   {# Idem pour un autre champ. #}
   <div class="form-group">
     {{ form_label(form.content, "Contenu de l'annonce", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-    {{ form_errors(form.title) }}
+    {{ form_errors(form.content) }}
     <div class="col-sm-10">
       {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
     </div>
