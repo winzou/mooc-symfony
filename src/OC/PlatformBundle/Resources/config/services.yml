@@ -24,3 +24,11 @@ services:
     class: OC\PlatformBundle\Purger\AdvertPurger
     arguments:
       - "@doctrine.orm.entity_manager"
+
+  oc_platform.validator.antiflood:                        # Le nom du service
+    class: OC\PlatformBundle\Validator\AntifloodValidator # La classe du service, ici notre validateur déjà créé
+    arguments:                                            # Les données qu'on injecte au service : la requête et l'EntityManager
+      - "@request_stack"
+      - "@doctrine.orm.entity_manager"
+    tags:
+      - { name: validator.constraint_validator, alias: oc_platform_antiflood }  # C'est avec l'alias qu'on retrouvera le service

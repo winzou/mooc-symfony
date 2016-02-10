@@ -6,6 +6,7 @@ namespace OC\PlatformBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use OC\PlatformBundle\Validator\Antiflood;
 // On rajoute ce use pour la contrainte :
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 // N'oubliez pas de rajouter ce « use », il définit le namespace pour les annotations de validation
@@ -59,6 +60,7 @@ class Advert
    *
    * @ORM\Column(name="content", type="string", length=255)
    * @Assert\NotBlank()
+   * @Antiflood()
    */
   private $content;
 
