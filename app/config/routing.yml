@@ -7,3 +7,14 @@ oc_platform:
 # On inclut également les routes de notre CoreBundle, sans préfixe
 oc_core:
     resource: "@OCCoreBundle/Resources/config/routing.yml"
+
+login:
+    path: /login
+    defaults:
+        _controller: OCUserBundle:Security:login
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout
