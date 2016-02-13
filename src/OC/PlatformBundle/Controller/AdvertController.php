@@ -149,4 +149,20 @@ class AdvertController extends Controller
       'listAdverts' => $listAdverts
     ));
   }
+
+  // Méthode facultative pour tester la purge
+  public function purgeAction($days, Request $request)
+  {
+    // On récupère notre service
+    $purger = $this->get('oc_platform.purger.advert');
+
+    // On purge les annonces
+    $purger->purge($days);
+
+    // On ajoute un message flash arbitraire
+    $request->getSession()->getFlashBag()->add('info', 'Les annonces plus vieilles que '.$days.' jours ont été purgées.');
+
+    // On redirige vers la page d'accueil
+    return $this->redirectToRoute('oc_platform_home');
+  }
 }
