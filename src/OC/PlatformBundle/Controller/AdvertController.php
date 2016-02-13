@@ -86,9 +86,9 @@ class AdvertController extends Controller
 
     // Création de l'entité
     $advert = new Advert();
-    $advert->setTitle('Recherche développeur Symfony2.');
+    $advert->setTitle('Recherche développeur Symfony.');
     $advert->setAuthor('Alexandre');
-    $advert->setContent("Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…");
+    $advert->setContent("Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…");
 
     // Création de l'entité Image
     $image = new Image();
