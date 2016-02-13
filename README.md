@@ -1,68 +1,41 @@
-Symfony Standard Edition
-========================
+# OCPlatform
+Code source de la plateforme d'annonce construite grâce au [MOOC OpenClassrooms](https://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2).
+### [Ce cours Symfony est également disponible en livre](http://www.eyrolles.com/Informatique/Livre/developpez-votre-site-web-avec-le-framework-symfony2-9791090085428) [et en ebook](https://openclassrooms.com/ebooks/developpez-votre-site-web-avec-le-framework-symfony2)
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony2
-application that you can use as the skeleton for your new applications.
+# Installation
+## 1. Récupérer le code
+Vous avez deux solutions pour le faire :
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+1. Via Git, en clonant ce dépôt ;
+2. Via le téléchargement du code source en une archive ZIP, à cette adresse : https://github.com/winzou/mooc-symfony/archive/master.zip
 
-What's inside?
---------------
+*Attention, le code est divisé en plusieurs branches `iteration-XX`. Sur la branche `master` vous n'avez que le tout début du cours, n'hésitez pas à [changer de branche](https://github.com/winzou/mooc-symfony/branches) !*
 
-The Symfony Standard Edition is configured with the following defaults:
+## 2. Définir vos paramètres d'application
+Pour ne pas qu'on se partage tous nos mots de passe, le fichier `app/config/parameters.yml` est ignoré dans ce dépôt. A la place, vous avez le fichier `parameters.yml.dist` que vous devez renommer (enlevez le `.dist`) et modifier.
 
-  * An AppBundle you can use to start coding;
+## 3. Télécharger les vendors
+Avec Composer bien évidemment :
 
-  * Twig as the only configured template engine;
+    php composer.phar install
 
-  * Doctrine ORM/DBAL;
+## 4. Créez la base de données
+Si la base de données que vous avez renseignée dans l'étape 2 n'existe pas déjà, créez-la :
 
-  * Swiftmailer;
+    php bin/console doctrine:database:create
 
-  * Annotations enabled for everything.
+Puis créez les tables correspondantes au schéma Doctrine :
 
-It comes pre-configured with the following bundles:
+    php bin/console doctrine:schema:update --dump-sql
+    php bin/console doctrine:schema:update --force
 
-  * **FrameworkBundle** - The core Symfony framework bundle
+Enfin, éventuellement, ajoutez les fixtures :
 
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
+    php bin/console doctrine:fixtures:load
 
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
+## 5. Publiez les assets
+Publiez les assets dans le répertoire web :
 
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
+    php bin/console assets:install web
 
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
-
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-Enjoy!
-
-[1]:  https://symfony.com/doc/3.0/book/installation.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/3.0/book/doctrine.html
-[8]:  https://symfony.com/doc/3.0/book/templating.html
-[9]:  https://symfony.com/doc/3.0/book/security.html
-[10]: https://symfony.com/doc/3.0/cookbook/email.html
-[11]: https://symfony.com/doc/3.0/cookbook/logging/monolog.html
-[13]: https://symfony.com/doc/3.0/bundles/SensioGeneratorBundle/index.html
+## Et profitez !
