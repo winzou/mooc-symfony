@@ -2,8 +2,7 @@
 
 security:
   encoders:
-    Symfony\Component\Security\Core\User\User: plaintext
-    OC\UserBundle\Entity\User: plaintext
+    OC\UserBundle\Entity\User: sha512
 
   role_hierarchy:
     # Un admin hérite des droits d'auteur et de modérateur
@@ -12,12 +11,8 @@ security:
     ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
   providers:
-    # … vous pouvez supprimer le fournisseur « in_memory »
-    # Et voici notre nouveau fournisseur :
     main:
-      entity:
-        class:    OC\UserBundle\Entity\User
-        property: username
+      id: fos_user.user_provider.username
 
   firewalls:
     dev:
@@ -33,6 +28,8 @@ security:
       logout:
         path:       logout
         target:     /platform
+      remember_me:
+        secret:     %secret% # %secret% est un paramètre de parameter
 
   access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
