@@ -8,8 +8,11 @@ use OC\PlatformBundle\Entity\Advert;
 use OC\PlatformBundle\Form\AdvertEditType;
 use OC\PlatformBundle\Form\AdvertType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+// N'oubliez pas ce use pour l'annotation
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class AdvertController extends Controller
 {
@@ -78,8 +81,14 @@ class AdvertController extends Controller
     ));
   }
 
+  /**
+   * @Security("has_role('ROLE_AUTEUR')")
+   */
   public function addAction(Request $request)
   {
+    // Plus besoin du if avec le security.context, l'annotation s'occupe de tout !
+    // Dans cette méthode, vous êtes sûrs que l'utilisateur courant dispose du rôle ROLE_AUTEUR
+
     $advert = new Advert();
     $form   = $this->get('form.factory')->create(AdvertType::class, $advert);
 
