@@ -23,10 +23,10 @@ security:
       anonymous:    true
       provider:     main
       form_login:
-        login_path: login
-        check_path: login_check
+        login_path: fos_user_security_login
+        check_path: fos_user_security_check
       logout:
-        path:       logout
+        path:       fos_user_security_logout
         target:     /platform
       remember_me:
         secret:     %secret% # %secret% est un paramètre de parameter
