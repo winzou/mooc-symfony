@@ -39,3 +39,8 @@ services:
       - "@oc_platform.antispam"
     tags:
       -  { name: twig.extension }
+
+  oc_platform.form.ckeditor:
+    class: OC\PlatformBundle\Form\CkeditorType
+    tags:
+      - { name: form.type, alias: ckeditor }
