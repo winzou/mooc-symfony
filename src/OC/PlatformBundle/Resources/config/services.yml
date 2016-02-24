@@ -32,3 +32,10 @@ services:
       - "@doctrine.orm.entity_manager"
     tags:
       - { name: validator.constraint_validator, alias: oc_platform_antiflood }  # C'est avec l'alias qu'on retrouvera le service
+
+  oc_platform.twig.antispam_extension:
+    class: OC\PlatformBundle\Twig\AntispamExtension
+    arguments:
+      - "@oc_platform.antispam"
+    tags:
+      -  { name: twig.extension }
