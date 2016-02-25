@@ -56,3 +56,16 @@ services:
       - "2016-06-01"
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: processBeta }
+
+  oc_platform.bigbrother.message_notificator:
+    class: OC\PlatformBundle\Bigbrother\MessageNotificator
+    arguments:
+      - "@mailer"
+
+  oc_platform.bigbrother.message_listener:
+    class: OC\PlatformBundle\Bigbrother\MessageListener
+    arguments:
+      - "@oc_platform.bigbrother.message_notificator"
+      - ["alex", "marine", "pierre"]
+    tags:
+      - { name: kernel.event_listener, event: oc_platform.post_message, method: processMessage }
