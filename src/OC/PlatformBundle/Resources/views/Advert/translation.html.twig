@@ -2,6 +2,8 @@
 
 <html>
   <body>
-    {{ 'Hello'|trans }} {{ name }}!
+    {{ 'hello'|trans({'%name%': name}) }}
+    <br>
+    Aujourd'hui nous sommes le {{ 'now'|localizeddate('full', 'none') }} et il est {{ 'now'|localizeddate('none', 'short') }}
   </body>
 </html>
