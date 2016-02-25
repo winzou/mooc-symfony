@@ -203,4 +203,11 @@ class AdvertController extends Controller
     // On redirige vers la page d'accueil
     return $this->redirectToRoute('oc_platform_home');
   }
+
+  public function translationAction($name)
+  {
+    return $this->render('OCPlatformBundle:Advert:translation.html.twig', array(
+      'name' => $name
+    ));
+  }
 }

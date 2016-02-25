@@ -12,3 +12,8 @@ _errors:
 
 _main:
     resource: routing.yml
+
+oc_platform_translation:
+  path: /{_locale}/traduction/{name}
+  defaults:
+    _controller: OCPlatformBundle:Advert:translation
