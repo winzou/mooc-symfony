@@ -11,6 +11,12 @@
     {% block stylesheets %}
       {# On charge le CSS de bootstrap depuis le site directement #}
       <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+      {% stylesheets filter="cssrewrite, ?scssphp"
+        'bundles/ocplatform/css/main.css'
+        'bundles/ocplatform/css/platform.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+      {% endstylesheets %}
     {% endblock %}
   </head>
 
