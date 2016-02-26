@@ -86,3 +86,7 @@ services:
     class: Twig_Extensions_Extension_Intl
     tags:
       - { name: twig.extension }
+
+assetic:
+  debug:          '%kernel.debug%'
+  use_controller: '%kernel.debug%'
