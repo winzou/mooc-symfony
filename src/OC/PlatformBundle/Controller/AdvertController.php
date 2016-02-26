@@ -49,18 +49,9 @@ class AdvertController extends Controller
     ));
   }
 
-  public function viewAction($id)
+  public function viewAction(Advert $advert)
   {
     $em = $this->getDoctrine()->getManager();
-
-    // Pour récupérer une seule annonce, on utilise la méthode find($id)
-    $advert = $em->getRepository('OCPlatformBundle:Advert')->find($id);
-
-    // $advert est donc une instance de OC\PlatformBundle\Entity\Advert
-    // ou null si l'id $id n'existe pas, d'où ce if :
-    if (null === $advert) {
-      throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas.");
-    }
 
     // Récupération de la liste des candidatures de l'annonce
     $listApplications = $em
@@ -116,20 +107,13 @@ class AdvertController extends Controller
     ));
   }
 
-  public function editAction($id, Request $request)
+  public function editAction(Advert $advert, Request $request)
   {
-    $em = $this->getDoctrine()->getManager();
-
-    $advert = $em->getRepository('OCPlatformBundle:Advert')->find($id);
-
-    if (null === $advert) {
-      throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas.");
-    }
-
     $form = $this->get('form.factory')->create(AdvertEditType::class, $advert);
 
     if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
       // Inutile de persister ici, Doctrine connait déjà notre annonce
+      $em = $this->getDoctrine()->getManager();
       $em->flush();
 
       $request->getSession()->getFlashBag()->add('notice', 'Annonce bien modifiée.');
@@ -143,15 +127,9 @@ class AdvertController extends Controller
     ));
   }
 
-  public function deleteAction(Request $request, $id)
+  public function deleteAction(Request $request, Advert $advert)
   {
     $em = $this->getDoctrine()->getManager();
-
-    $advert = $em->getRepository('OCPlatformBundle:Advert')->find($id);
-
-    if (null === $advert) {
-      throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas.");
-    }
 
     // On crée un formulaire vide, qui ne contiendra que le champ CSRF
     // Cela permet de protéger la suppression d'annonce contre cette faille
