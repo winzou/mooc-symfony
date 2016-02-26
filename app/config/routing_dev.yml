@@ -13,6 +13,10 @@ _errors:
 _main:
     resource: routing.yml
 
+coresphere_console:
+  resource: .
+  type: extra
+
 oc_platform_translation:
   path: /{_locale}/traduction/{name}
   defaults:
