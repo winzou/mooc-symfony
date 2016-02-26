@@ -9,9 +9,11 @@ use OC\PlatformBundle\Event\MessagePostEvent;
 use OC\PlatformBundle\Event\PlatformEvents;
 use OC\PlatformBundle\Form\AdvertEditType;
 use OC\PlatformBundle\Form\AdvertType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AdvertController extends Controller
@@ -187,5 +189,13 @@ class AdvertController extends Controller
     return $this->render('OCPlatformBundle:Advert:translation.html.twig', array(
       'name' => $name
     ));
+  }
+
+  /**
+   * @ParamConverter("json")
+   */
+  public function ParamConverterAction($json)
+  {
+    return new Response(print_r($json, true));
   }
 }

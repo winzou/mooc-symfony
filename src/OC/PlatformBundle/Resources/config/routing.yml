@@ -40,3 +40,8 @@ oc_platform_purge:
         _controller: OCPlatformBundle:Advert:purge
     requirements:
         days: \d+
+
+oc_platform_paramconverter:
+  path: /test/{json}
+  defaults:
+    _controller: "OCPlatformBundle:Advert:ParamConverter"
