@@ -1,0 +1,28 @@
+{# On utilise ici le layout général, qui se situe dans ce même CoreBundle maintenant #}
+{% extends "OCCoreBundle::layout.html.twig" %}
+
+{% block title %}
+  Page d'accueil - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+  <h2>Page d'accueil de notre site</h2>
+
+  {# On affiche tous les messages flash dont le nom est « info » #}
+  {% for message in app.session.flashbag.get('info') %}
+    <div class="alert alert-info">Message flash : {{ message }}</div>
+  {% endfor %}
+
+  {# Pour afficher les dernières annonces, on réutilise le contrôleur menu du PlatformBundle #}
+  <h3>Dernières annonces</h3>
+  {{ render(controller("OCPlatformBundle:Advert:menu", {'limit': 3})) }}
+
+  <h3>Derniers messages sur le forum (hypothétique)</h3>
+  <p>
+    {# Ici, on devrait utiliser un contrôleur d'un éventuel ForumBundle pour afficher les derniers posts sur le forum,
+       ce n'est pas le sujet ici #}
+    Bla bla bla...
+  </p>
+
+{% endblock %}
