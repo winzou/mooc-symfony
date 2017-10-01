@@ -1,0 +1,9 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/translation.html.twig #}
+
+<html>
+  <body>
+    {{ 'hello'|trans({'%name%': name}) }}
+    <br>
+    Aujourd'hui nous sommes le {{ 'now'|localizeddate('full', 'none') }} et il est {{ 'now'|localizeddate('none', 'short') }}
+  </body>
+</html>
