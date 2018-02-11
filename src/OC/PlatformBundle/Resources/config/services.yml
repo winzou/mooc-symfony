@@ -1,4 +1,9 @@
+# src/OC/PlatformBundle/Resources/config/services.yml
+
 services:
-#    oc_platform.example:
-#        class: OC\PlatformBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    oc_platform.antispam:
+        class: OC\PlatformBundle\Antispam\OCAntispam
+        arguments:
+            - "@mailer"
+            - %locale%
+            - 50
